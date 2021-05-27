@@ -1,0 +1,18 @@
+.loader-container{
+    background-color: rgba(0,0,0,.8);
+    color: #ddd;
+
+    height: 100%;
+    height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    height: stretch;
+
+    width: 100%!important;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: stretch;    
+    padding: 20% 25%;
+    position: fixed;
+    z-index: 9999;
+    margin-top: -56px;
+}
