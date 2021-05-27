@@ -8,6 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TasksComponent } from './tasks/tasks.component';
 import { LoaderComponent } from './loader/loader.component';
 import { TokenInterceptor } from './services/token.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,10 @@ import { TokenInterceptor } from './services/token.interceptor';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true
+    }),
   ],
   providers: [
     {

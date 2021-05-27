@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Task } from '../models/task';
 import { TaskService } from '../services/tasks.service';
 
@@ -10,7 +11,8 @@ import { TaskService } from '../services/tasks.service';
 export class TasksComponent implements OnInit {
 
   constructor(
-    private taskService: TaskService
+    private taskService: TaskService,
+    private toastr: ToastrService,
   ) { }
 
   tasks: Task[] = []
@@ -35,6 +37,9 @@ export class TasksComponent implements OnInit {
     this.saveOrUpdate(task).subscribe( (data : any) => {
       task.editMode = false
       task = data
+      this.toastr.success('Tarefa salvo com sucesso!', 'Sucesso!',  {progressBar: true});
+    }, err=> {
+      this.toastr.error('Erro ao salvar tarefa!', 'Erro!',  {progressBar: true});
     })
   }
 
@@ -55,7 +60,10 @@ export class TasksComponent implements OnInit {
 
   deleteById(id: Number) {
     this.taskService.delete(id).subscribe(data => {
+      this.toastr.success('Tarefa removida com sucesso!', 'Sucesso!',  {progressBar: true});
       this.getTasks()
+    }, err=> {
+      this.toastr.error('Erro ao deletar tarefa!', 'Erro!',  {progressBar: true});
     })
   }
 
