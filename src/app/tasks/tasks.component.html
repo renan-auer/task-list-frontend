@@ -1,0 +1,80 @@
+<div id="task-component">
+    <div class="task-container">
+        <div class="title-container">
+            <i class="fa fa-tasks icon"></i><h3>Task List</h3>
+        </div>
+        <hr>
+        <div class="tasks-container">
+            <div class="row">
+                <div class="col-12 text-right">
+                    <button class="btn btn-sm btn-primary" (click)="addTask()">Nova tarefa</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Tarefa</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" class="small-column"></th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center"  *ngIf="tasks.length == 0">
+                                <td colspan="4"> Nenhuma tarefa foi cadastrada.</td>
+                            </tr>
+                            <tr *ngFor="let task of tasks; let i = index">
+                                <td>
+                                    <div *ngIf="task.editMode">
+                                        <input type="text" 
+                                        class="form-control form-control-sm" [(ngModel)]="task.title">
+                                    </div>
+                                    <div *ngIf="!task.editMode">{{task.title}}</div>
+                                </td>
+                                <td>
+                                    <div *ngIf="task.editMode">
+                                        <input type="text" 
+                                        class="form-control form-control-sm" [(ngModel)]="task.description">
+                                    </div>
+                                    <div *ngIf="!task.editMode">{{task.description}}</div>
+                                </td>
+                                <td>
+                                    <div *ngIf="task.editMode">
+                                        <select
+                                        class="form-control form-control-sm" [(ngModel)]="task.status">
+                                        <option value="ATIVO">ATIVO</option>    
+                                        <option value="INATIVO">INATIVO</option>    
+                                    </select>
+    
+                                    </div>
+                                    <div *ngIf="!task.editMode">{{task.status}}</div>
+                                </td>
+                                <td class="d-flex justify-content-end">
+                                    <div *ngIf="!task.editMode" class="btn-group" >
+                                        <button class="btn btn-sm btn-primary" (click)="editTask(task)">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" (click)="deleteById(task.id)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex btn-group" *ngIf="task.editMode">
+                                        <button class="btn btn-sm btn-success" (click)="saveTask(task)">
+                                            Salvar
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" (click)="deleteByIndex(i)">
+                                            Remover
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
